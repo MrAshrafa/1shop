@@ -374,6 +374,61 @@ client.on('message', message => {
     }  //7md
     }) //7md
 
+client.on('message', message => {
+ 
+    if (message.content === "#bot") {
+var year = message.guild.createdAt.getFullYear()
+var month = message.guild.createdAt.getMonth()
+var day = message.guild.createdAt.getDate()
+    let embed = new Discord.RichEmbed()
+ 
+.addField('**Bot Servers**',`[ ${client.guilds.size} ]`)
+.addField('**Users**',`[ ${client.users.size} ]`)
+.addField('**Channels**',`[ ${client.channels.size} ]`)
+.addField('**ID**',`[ ${client.user.id} ]`)
+.addField('**Name**',`[ ${client.user.tag} ]`)
+.addField('Requested by:', "<@" + message.author.id + ">")
+.setColor("#51cde6")
+.setDescription(`${message.guild.name}`)
+     message.channel.sendEmbed(embed);
+}
+ 
+});
 
+var adminprefix = '#'
+
+const developers = ["458029748820508702","513080894236655616"]
+client.on('message', message => {
+    var argresult = message.content.split(` `).slice(1).join(' ');
+      if (!developers.includes(message.author.id)) return;
+      
+  if (message.content.startsWith(adminprefix + 'setg')) {
+    client.user.setGame(argresult);
+      message.channel.send(`**✅   ${argresult}**`)
+  } else 
+     if (message.content === (adminprefix + "leave")) {
+    message.guild.leave();        
+  } else  
+  if (message.content.startsWith(adminprefix + 'setw')) {
+  client.user.setActivity(argresult, {type:'WATCHING'});
+      message.channel.send(`**✅   ${argresult}**`)
+  } else 
+  if (message.content.startsWith(adminprefix + 'setl')) {
+  client.user.setActivity(argresult , {type:'LISTENING'});
+      message.channel.send(`**✅   ${argresult}**`)
+  } else 
+  if (message.content.startsWith(adminprefix + 'sets')) {
+    client.user.setGame(argresult, "https://www.twitch.tv/dream");
+      message.channel.send(`**✅**`)
+  }
+  if (message.content.startsWith(adminprefix + 'setname')) {
+  client.user.setUsername(argresult).then
+      message.channel.send(`Changing The Name To ..**${argresult}** `)
+} else
+if (message.content.startsWith(adminprefix + 'setava')) {
+  client.user.setAvatar(argresult);
+    message.channel.send(`Changing The Avatar To :**${argresult}** `);
+}
+});
 
 client.login(process.env.BOT_TOKEN);
