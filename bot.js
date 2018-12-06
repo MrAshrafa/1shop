@@ -105,7 +105,7 @@ client.on('message', message => {
 }
 });
 client.on('message', message => {
-    var prefix = "4"
+    var prefix = "#"
   if (message.author.x5bz) return;
   if (!message.content.startsWith(prefix)) return;
  
